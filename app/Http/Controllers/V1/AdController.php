@@ -18,7 +18,7 @@ class AdController extends Controller
      */
     public function index()
     {
-        $ad = Ad::where([['type','MS'],['size','640x1920']])->first();
+        $ad = Ad::where([['type','MS'],['size','360x640']])->first();
 
         return response(['data' => $ad],200);
     }
