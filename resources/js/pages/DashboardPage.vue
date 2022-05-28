@@ -14,6 +14,7 @@ import ProgressCircularComponent from "../components/ProgressCircularComponent";
 import HeaderComponent from "../components/HeaderComponent";
 import FooterComponent from "../components/FooterComponent";
 import Echo from "laravel-echo";
+import sound from '../../../storage/notification.mp3'
 export default {
     data : () =>({
        isLoading : true,
@@ -39,7 +40,7 @@ export default {
         },
         playSound()
         {
-            let audio = new Audio('storage/notification.mp3')
+            let audio = new Audio(sound)
             audio.play()
         }
     },
