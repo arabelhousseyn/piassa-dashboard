@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers\V1;
 
+use App\Events\OrderConfirmedForClient;
+use App\Events\OrderConfirmedForSeller;
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Event;
 use mysql_xdevapi\Exception;
 use App\Models\{ShipperUserOrder, UserOrder};
 use App\Traits\CustomPushNotificationTrait;
@@ -86,7 +89,8 @@ class UserOrderController extends Controller
 
             $this->pushNotification('Votre suggestion est en ordre','votre suggestion est en ordre',$sellers_ids,'seller');
             $this->pushNotification('Vous avez une nouvelle commande','Vous avez une nouvelle commande',$shipper_ids,'shipper');
-
+            event(new OrderConfirmedForSeller($user_order));
+            event(new OrderConfirmedForClient($user_order));
 
             return response()->noContent();
         }catch (\Exception $exception)
