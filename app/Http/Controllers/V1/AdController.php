@@ -49,7 +49,7 @@ class AdController extends Controller
             Ad::create([
                 'path' => $path,
                 'type' => 'MS',
-                'size' => '640x1920'
+                'size' => '360x640'
             ]);
             return response(['message' => 'created !'],200);
         }
