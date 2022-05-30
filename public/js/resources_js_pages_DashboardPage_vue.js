@@ -538,8 +538,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_HeaderComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/HeaderComponent */ "./resources/js/components/HeaderComponent.vue");
 /* harmony import */ var _components_FooterComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/FooterComponent */ "./resources/js/components/FooterComponent.vue");
 /* harmony import */ var laravel_echo__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! laravel-echo */ "./node_modules/laravel-echo/dist/echo.js");
-/* harmony import */ var _storage_notification_mp3__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../storage/notification.mp3 */ "./storage/notification.mp3");
-/* harmony import */ var _storage_notification_mp3__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_storage_notification_mp3__WEBPACK_IMPORTED_MODULE_4__);
 //
 //
 //
@@ -551,7 +549,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-
+//
+//
+//
+//
 
 
 
@@ -587,8 +588,9 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     playSound: function playSound() {
-      var audio = new Audio((_storage_notification_mp3__WEBPACK_IMPORTED_MODULE_4___default()));
-      audio.play();
+      var x = document.getElementById("myAudio"); //let audio = new Audio(sound)
+
+      x.play();
     }
   },
   mounted: function mounted() {
@@ -23499,6 +23501,8 @@ var render = function () {
     "div",
     { staticClass: "dashboard" },
     [
+      _vm._m(0),
+      _vm._v(" "),
       _c("progress-circular-component"),
       _vm._v(" "),
       _c("header-component"),
@@ -23510,20 +23514,24 @@ var render = function () {
     1
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("audio", { attrs: { id: "myAudio" } }, [
+      _c("source", {
+        attrs: { src: "storage/notification.mp3", type: "audio/mpeg" },
+      }),
+      _vm._v(
+        "\n        Your browser does not support the audio element.\n    "
+      ),
+    ])
+  },
+]
 render._withStripped = true
 
 
-
-/***/ }),
-
-/***/ "./storage/notification.mp3":
-/*!**********************************!*\
-  !*** ./storage/notification.mp3 ***!
-  \**********************************/
-/***/ (() => {
-
-throw new Error("Module parse failed: Unexpected character '\u0004' (1:3)\nYou may need an appropriate loader to handle this file type, currently no loaders are configured to process this file. See https://webpack.js.org/concepts#loaders\n(Source code omitted for this binary file)");
 
 /***/ })
 

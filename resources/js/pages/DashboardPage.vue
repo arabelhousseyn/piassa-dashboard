@@ -1,5 +1,9 @@
 <template>
     <div class="dashboard">
+        <audio id="myAudio">
+            <source src="storage/notification.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
         <progress-circular-component />
             <header-component />
             <v-main v-if="!isLoading">
@@ -14,7 +18,6 @@ import ProgressCircularComponent from "../components/ProgressCircularComponent";
 import HeaderComponent from "../components/HeaderComponent";
 import FooterComponent from "../components/FooterComponent";
 import Echo from "laravel-echo";
-import sound from '../../../storage/notification.mp3'
 export default {
     data : () =>({
        isLoading : true,
@@ -40,8 +43,9 @@ export default {
         },
         playSound()
         {
-            let audio = new Audio(sound)
-            audio.play()
+            var x = document.getElementById("myAudio")
+            //let audio = new Audio(sound)
+            x.play()
         }
     },
      mounted() {
