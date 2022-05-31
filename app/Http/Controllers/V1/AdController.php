@@ -86,15 +86,18 @@ class AdController extends Controller
      */
     public function update(StoreAdRequest $request, $id)
     {
-        try {
-            $ad = Ad::findOrFail($id);
-            $image_name = str_replace('storage/ad/','',$ad->path);
-            $image_name = str_replace(env('APP_URL'),'',$image_name);
-            $request->file('ad')->storeAs('public/ad/',$image_name);
-            return response()->noContent();
-        }catch (\Exception $exception)
+        Ad::delete();
+        if($request->validated())
         {
-            return response(['message' => 'not found'],404);
+            $image_name = uniqid() . '.' . $request->file('ad')->extension();
+            $path = $request->file('ad')->storeAs('public/ad',$image_name);
+            $path = str_replace('public','storage',$path);
+            Ad::create([
+                'path' => $path,
+                'type' => 'MS',
+                'size' => '360x640'
+            ]);
+            return response(['message' => 'created !'],200);
         }
     }
 
