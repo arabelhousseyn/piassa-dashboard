@@ -86,7 +86,7 @@ class AdController extends Controller
      */
     public function update(StoreAdRequest $request, $id)
     {
-        Ad::delete();
+        Ad::query()->delete();
         if($request->validated())
         {
             $image_name = uniqid() . '.' . $request->file('ad')->extension();
