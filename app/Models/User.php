@@ -86,6 +86,11 @@ class User extends Model
         return $this->hasOne(UserInfo::class)->withDefault([]);
     }
 
+    public function notes()
+    {
+        return $this->hasMany(UserNote::class);
+    }
+
 
 
 
