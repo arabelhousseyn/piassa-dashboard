@@ -85,6 +85,11 @@
                                     <v-list-item-content><v-list-item-title>Sécurité</v-list-item-title></v-list-item-content>
                                 </v-list-item>
 
+                                <v-list-item link @click="notes(item)">
+                                    <v-list-item-icon><v-icon color="primary">mdi-fountain-pen-tip</v-icon></v-list-item-icon>
+                                    <v-list-item-content><v-list-item-title>Notes</v-list-item-title></v-list-item-content>
+                                </v-list-item>
+
                                 <v-list-item v-if="item.deleted_at == null" link @click="destroy(item.id)">
                                     <v-list-item-icon><v-icon color="red">mdi-delete</v-icon></v-list-item-icon>
                                     <v-list-item-content><v-list-item-title>Supprimer</v-list-item-title></v-list-item-content>
@@ -132,6 +137,7 @@
             <update-user-dialog v-if="dialog3" :dialog="dialog3" @close3="close3" :data="data" />
             <security-dialog v-if="dialog4" :dialog="dialog4" @close4="close4" :user_id="id" />
             <user-commercial-info v-if="dialog5" :dialog="dialog5" @close5="close5" :commercial_info="info" />
+            <user-note-dialog v-if="dialog6" :dialog="dialog6" :data="item" @close="close6" />
         </v-container>
     </div>
 </template>
@@ -145,8 +151,10 @@ import UpdateUserDialog from "../dialog/user/UpdateUserDialog";
 import SecurityDialog from "../dialog/user/SecurityDialog";
 import UserCommercialInfo from "../dialog/user/UserCommercialInfo";
 import BreadCrumbsComponent from "../BreadCrumbsComponent";
+import UserNoteDialog from "../dialog/user/UserNoteDialog";
 export default {
     components: {
+        UserNoteDialog,
         BreadCrumbsComponent,
         UserCommercialInfo,
         SecurityDialog,
@@ -158,11 +166,13 @@ export default {
         dialog3 : false,
         dialog4 : false,
         dialog5 : false,
+        dialog6 : false,
         id : null,
         users : [],
         profile : [],
         data : [],
         info : [],
+        item : null,
         loading : true,
         selected : null,
         search : null,
@@ -175,6 +185,7 @@ export default {
             },
             { text: 'Email', value: 'email' },
             { text: 'Role', value: 'roles' },
+            { text: 'Notes', value: 'note' },
             { text: 'Créé à', value: 'created_at' },
             { text: 'Statu', value: 'deleted_at' },
             { text: 'actions', value: 'actions', sortable: false },
@@ -225,6 +236,11 @@ export default {
         {
             this.dialog5 = false
         },
+        close6()
+        {
+            this.dialog6 = false
+            this.item = null
+        },
         init()
         {
             axios.get('/sanctum/csrf-cookie').then(res =>{
@@ -236,6 +252,11 @@ export default {
                     this.$toast.open({message : 'Erreur dans serveur veuillez réessayer',type : 'error'})
                 })
             })
+        },
+        notes(data)
+        {
+            this.dialog6 = true
+            this.item = data
         },
         openProfile(data)
         {
