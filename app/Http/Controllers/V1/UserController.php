@@ -218,4 +218,14 @@ class UserController extends Controller
             return response($exception->getMessage(),500);
         }
     }
+
+    public function storeNote(StoreNoteRequest $request)
+    {
+        if($request->validated())
+        {
+            $user = User::find($request->user_id);
+            $user->update($request->only('note'));
+            return response(['message' => 'created!'],201);
+        }
+    }
 }
