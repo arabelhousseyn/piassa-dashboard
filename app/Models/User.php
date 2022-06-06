@@ -25,6 +25,7 @@ class User extends Model
         'otp',
         'password',
         'phone_verified_at',
+        'note'
     ];
 
     /**
@@ -84,11 +85,6 @@ class User extends Model
     public function commercial_info()
     {
         return $this->hasOne(UserInfo::class)->withDefault([]);
-    }
-
-    public function notes()
-    {
-        return $this->hasMany(UserNote::class);
     }
 
 

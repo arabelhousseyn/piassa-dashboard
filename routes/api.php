@@ -36,8 +36,6 @@ Route::middleware(['auth:sanctum','app_version'])->group(function (){
             Route::put('restore/{id}','restore')->whereNumber('id');
             Route::put('update-commercial-info/{id}','updateCommercialInfo')->whereNumber('id');
             Route::post('send-push-notifications','sendPushNotification');
-            Route::post('store-note','storeNote');
-            Route::put('update-note/{user_note_id}','updateNote')->whereNumber('user_note_id');
     });
 
     Route::prefix('users')->group(function (){
