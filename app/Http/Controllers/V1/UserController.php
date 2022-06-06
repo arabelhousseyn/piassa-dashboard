@@ -4,14 +4,16 @@ namespace App\Http\Controllers\V1;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SendPushNotificationRequest;
+use App\Http\Requests\StoreNoteRequest;
 use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\UpdateNoteRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Services\UpdateUserService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
-use App\Models\{User, UserProfile};
+use App\Models\{User, UserNote, UserProfile};
 use App\Traits\SendPushNotificationTrait;
 class UserController extends Controller
 {
@@ -214,6 +216,26 @@ class UserController extends Controller
         }catch (\Exception $exception)
         {
             return response($exception->getMessage(),500);
+        }
+    }
+
+    public function storeNote(StoreNoteRequest $request)
+    {
+        if($request->validated())
+        {
+            $user = User::find($request->user_id);
+            $user->notes()->create($request->only('note'));
+            return response(['message' => 'created!'],201);
+        }
+    }
+
+    public function updateNote(Request $request,$user_note_id)
+    {
+        if($request->validated())
+        {
+            $user_note = UserNote::find($user_note_id);
+            $user_note->update($request->note);
+            return response()->noContent();
         }
     }
 }
