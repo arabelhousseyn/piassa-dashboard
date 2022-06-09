@@ -349,6 +349,11 @@ export default {
                 }
             }
 
+            if(this.data.email !== undefined)
+            {
+                delete this.data.email
+            }
+
 
             axios.get('/sanctum/csrf-cookie').then(res => {
                 axios.post('/api/sellers',this.data).then(e=>{

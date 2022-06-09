@@ -1174,6 +1174,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         _iterator6.f();
       }
 
+      if (this.data.email !== undefined) {
+        delete this.data.email;
+      }
+
       axios.get('/sanctum/csrf-cookie').then(function (res) {
         axios.post('/api/sellers', _this3.data).then(function (e) {
           _this3.$toast.open({
