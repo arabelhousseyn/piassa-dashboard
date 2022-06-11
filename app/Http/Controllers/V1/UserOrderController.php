@@ -16,7 +16,7 @@ class UserOrderController extends Controller
     use CustomPushNotificationTrait;
     public function getAllOrders()
     {
-        $user_orders = UserOrder::with('items.item.request.seller.profile','items.item.request.request.informations','items.item.request.request.type','events','user.profile','invoice','shipperUserOrder.shipper')->withTrashed()->latest('created_at')->get();
+        $user_orders = UserOrder::with('items.item.request.seller.profile','items.item.request.request.informations','items.item.request.request.vehicle.sign','items.item.request.request.type','events','user.profile','invoice','shipperUserOrder.shipper')->withTrashed()->latest('created_at')->get();
         return response(['data' => $user_orders],200);
     }
 

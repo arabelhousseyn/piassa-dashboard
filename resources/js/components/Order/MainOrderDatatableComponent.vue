@@ -82,6 +82,14 @@
                     <a v-if="item.invoice !== null" :href="item.invoice.path" target="_blank"><v-icon large>mdi-file-pdf-box</v-icon></a>
                 </template>
 
+                <template v-slot:item.items.item.request.request.vehicle.model="{ item }">
+                    <span>{{item.items[0].item.request.request.vehicle.model}}</span>
+                </template>
+
+                <template v-slot:item.items.item.request.request.vehicle.sign.name="{ item }">
+                    <span>{{item.items[0].item.request.request.vehicle.sign.name}}</span>
+                </template>
+
                 <template v-slot:item.confirmed_by_administrator_at="{ item }">
                     <v-chip dark v-if="item.confirmed_by_administrator_at == null" color="yellow">
                         En attente
@@ -141,6 +149,8 @@ export default {
             { text: 'Livreur', value: 'shipper_user_order.shipper.phone' },
             { text: 'Nom utilisateur', value: 'user.profile.full_name' },
             { text: 'Téléphone', value: 'user.phone' },
+            { text: 'Modèle', value: 'items.item.request.request.vehicle.model' },
+            { text: 'Marque', value: 'items.item.request.request.vehicle.sign.name' },
             { text: 'Sous Total', value: 'amount' },
             { text: 'Facture', value: 'invoice.path' },
             { text: 'Créé à', value: 'created_at' },

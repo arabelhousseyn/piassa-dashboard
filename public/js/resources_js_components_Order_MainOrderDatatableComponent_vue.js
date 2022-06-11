@@ -158,6 +158,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -195,6 +203,12 @@ __webpack_require__.r(__webpack_exports__);
       }, {
         text: 'Téléphone',
         value: 'user.phone'
+      }, {
+        text: 'Modèle',
+        value: 'items.item.request.request.vehicle.model'
+      }, {
+        text: 'Marque',
+        value: 'items.item.request.request.vehicle.sign.name'
       }, {
         text: 'Sous Total',
         value: 'amount'
@@ -1307,6 +1321,34 @@ var render = function () {
                           1
                         )
                       : _vm._e(),
+                  ]
+                },
+              },
+              {
+                key: "item.items.item.request.request.vehicle.model",
+                fn: function (ref) {
+                  var item = ref.item
+                  return [
+                    _c("span", [
+                      _vm._v(
+                        _vm._s(item.items[0].item.request.request.vehicle.model)
+                      ),
+                    ]),
+                  ]
+                },
+              },
+              {
+                key: "item.items.item.request.request.vehicle.sign.name",
+                fn: function (ref) {
+                  var item = ref.item
+                  return [
+                    _c("span", [
+                      _vm._v(
+                        _vm._s(
+                          item.items[0].item.request.request.vehicle.sign.name
+                        )
+                      ),
+                    ]),
                   ]
                 },
               },
