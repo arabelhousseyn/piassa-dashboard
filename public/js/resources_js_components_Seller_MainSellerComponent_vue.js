@@ -204,10 +204,17 @@ __webpack_require__.r(__webpack_exports__);
       dialog4: false,
       seller_id: null,
       headers: [{
+        text: 'Prénom',
+        value: 'profile.first_name'
+      }, {
+        text: 'Nom',
+        value: 'profile.last_name'
+      }, {
         text: 'Téléphone',
-        align: 'start',
-        sortable: true,
         value: 'phone'
+      }, {
+        text: 'Nom commercial',
+        value: 'profile.commercial_name'
       }, {
         text: 'Email',
         value: 'email'

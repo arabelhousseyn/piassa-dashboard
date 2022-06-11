@@ -141,12 +141,10 @@ export default {
         dialog4 : false,
         seller_id : null,
         headers: [
-            {
-                text: 'Téléphone',
-                align: 'start',
-                sortable: true,
-                value: 'phone',
-            },
+            { text: 'Prénom', value: 'profile.first_name' },
+            { text: 'Nom', value: 'profile.last_name' },
+            {text: 'Téléphone', value: 'phone'},
+            { text: 'Nom commercial', value: 'profile.commercial_name' },
             { text: 'Email', value: 'email' },
             { text: 'Créé à', value: 'created_at' },
             { text: 'Statu', value: 'deleted_at' },
