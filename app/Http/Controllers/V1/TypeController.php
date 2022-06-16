@@ -88,7 +88,7 @@ class TypeController extends Controller
     {
         if($request->validated())
         {
-            Type::whereId($id)->update($request->validated());
+            Type::whereId($id)->update($request->except('logo'));
             return response()->noContent();
         }
     }

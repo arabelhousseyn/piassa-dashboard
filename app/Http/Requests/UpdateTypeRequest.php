@@ -25,7 +25,6 @@ class UpdateTypeRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'logo' => 'required',
             'percent' => 'required'
         ];
     }
