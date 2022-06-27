@@ -208,21 +208,25 @@ export default {
           {
               this.selectedItem = 4;
           }
-          else if(path.includes('home/orders'))
+          else if(path.includes('home/requests'))
           {
               this.selectedItem = 5;
           }
-          else if(path.includes('home/notifications'))
+          else if(path.includes('home/orders'))
           {
               this.selectedItem = 6;
           }
-          else if(path.includes('home/statistics'))
+          else if(path.includes('home/notifications'))
           {
               this.selectedItem = 7;
           }
-          else if(path.includes('home/ads'))
+          else if(path.includes('home/statistics'))
           {
               this.selectedItem = 8;
+          }
+          else if(path.includes('home/ads'))
+          {
+              this.selectedItem = 9;
           }
           else{
               this.selectedItem = null

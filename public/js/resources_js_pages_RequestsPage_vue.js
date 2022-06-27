@@ -639,6 +639,18 @@ __webpack_require__.r(__webpack_exports__);
         sortable: true,
         value: 'request.type.name'
       }, {
+        text: 'Tel Client',
+        value: 'request.vehicle.user.phone'
+      }, {
+        text: 'Nom Client',
+        value: 'request.vehicle.user.profile.full_name'
+      }, {
+        text: 'Tel Vendeur',
+        value: 'seller.phone'
+      }, {
+        text: 'Nom Vendeur',
+        value: 'seller.profile.first_name'
+      }, {
         text: 'Détails',
         value: 'request.informations'
       }, {

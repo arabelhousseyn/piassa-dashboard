@@ -370,7 +370,7 @@ class SellerController extends Controller
 
     public function sellerRequests()
     {
-        $requests = SellerRequest::with('request.type','request.informations','seller',
+        $requests = SellerRequest::with('request.type','request.informations','seller.profile',
         'request.suggestions.suggestion','request.images','request.vehicle'
             ,'request.vehicle.sign','request.vehicle.user.profile')->latest('created_at')->get();
         return response(['data' => $requests],200);
