@@ -111,6 +111,10 @@ const routes = [
                 component : ()=> import('../pages/TypesPage')
             },
             {
+                path: 'requests',
+                component : () => import('../pages/RequestsPage')
+            },
+            {
               path: 'orders',
               component : () => import('../pages/OrderPage'),
                 children: [
