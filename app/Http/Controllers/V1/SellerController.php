@@ -2,15 +2,18 @@
 
 namespace App\Http\Controllers\V1;
 
+use App\Events\NewSuggestionEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SotreSellerJobTypes;
 use App\Http\Requests\StoreSellerJobRequest;
 use App\Http\Requests\StoreSellerJobSigns;
 use App\Http\Requests\StoreSellerPhoneRequest;
 use App\Http\Requests\StoreSellerRequest;
+use App\Http\Requests\StoreSellerSuggestionRequest;
 use App\Http\Requests\UpdateSellerRequest;
 use App\Services\UpdateSellerService;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Hash;
 use App\Models\{Seller, SellerJob, SellerJobSign, SellerJobType, SellerPhone, SellerRequest};
 use Illuminate\Http\Request;
@@ -385,6 +388,47 @@ class SellerController extends Controller
         }catch (ModelNotFoundException $exception)
         {
             return throw new ModelNotFoundException('request not found');
+        }
+    }
+
+    public function storeSellerSuggestion(StoreSellerSuggestionRequest $request)
+    {
+        $marks = explode(',',$request->marks);
+        $prices = explode(',',$request->prices);
+        $available_at = explode(',',$request->available_at);
+
+        if(count($marks) == count($prices) && count($marks) == count($available_at) &&
+            count($prices) == count($available_at))
+        {
+            $seller_request = SellerRequest::with('request.vehicle')->find($request->seller_request_id);
+
+            SellerRequest::whereId($request->seller_request_id)->update([
+                'suggest_him_at' => Carbon::now()
+            ]);
+
+            for ($i=0;$i<count($marks);$i++)
+            {
+                $seller_request->suggestion()->create([
+                    'mark' => $marks[$i],
+                    'price' => $prices[$i],
+                    'available_at' => $available_at[$i],
+                ]);
+            }
+            $data = SellerRequest::with('suggestion','request.informations')->find($request->seller_request_id);
+            event(new NewSuggestionEvent($data,$seller_request->request->vehicle->user_id));
+            $this->pushNotification('Vous avez une nouvelle suggestion','nouvelle suggestion',[$seller_request->request->vehicle->user_id],'clients');
+//                event(new NewRequestEvent($data));
+            return response(['success' => true],201);
+
+        }else{
+            $message = [
+                'message' => [
+                    'errors' => [
+                        'Erreur veuillez réessayer.'
+                    ]
+                ]
+            ];
+            return response($message,403);
         }
     }
 }
