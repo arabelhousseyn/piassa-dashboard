@@ -12,7 +12,7 @@ use App\Http\Requests\UpdateSellerRequest;
 use App\Services\UpdateSellerService;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Hash;
-use App\Models\{Seller, SellerJob, SellerJobSign, SellerJobType, SellerPhone};
+use App\Models\{Seller, SellerJob, SellerJobSign, SellerJobType, SellerPhone, SellerRequest};
 use Illuminate\Http\Request;
 
 class SellerController extends Controller
@@ -361,6 +361,30 @@ class SellerController extends Controller
                 ]
             ];
             return response($data,422);
+        }
+    }
+
+
+    public function sellerRequests()
+    {
+        $requests = SellerRequest::with('request.type','request.informations','seller',
+        'request.suggestions.suggestion','request.images','request.vehicle'
+            ,'request.vehicle.sign','request.vehicle.user.profile')->latest('created_at')->get();
+        return response(['data' => $requests],200);
+    }
+
+    public function destroySellerRequest($seller_request_id)
+    {
+        try {
+            $sellerRequest = SellerRequest::findOrFail($seller_request_id);
+            if(!$sellerRequest->trashed())
+            {
+                $sellerRequest->forceDelete();
+                return response()->noContent();
+            }
+        }catch (ModelNotFoundException $exception)
+        {
+            return throw new ModelNotFoundException('request not found');
         }
     }
 }

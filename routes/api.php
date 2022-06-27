@@ -89,6 +89,11 @@ Route::middleware(['auth:sanctum','app_version'])->group(function (){
             Route::post('store','storeSellerJob');
             Route::delete('destroy/{id}','destorySellerJob')->whereNumber('id');
         });
+
+        Route::prefix('requests')->group(function (){
+            Route::get('all','sellerRequests');
+            Route::delete('delete/{seller_request_id}','destroySellerRequest')->whereNumber('seller_request_id');
+        });
     });
 
     //types
