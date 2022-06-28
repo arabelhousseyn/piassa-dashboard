@@ -371,7 +371,7 @@ class SellerController extends Controller
     public function sellerRequests()
     {
 
-        $requests = UserRequest::with('vehicle.user.profile','vehicle.sign','suggestions','informations','type','images')
+        $requests = UserRequest::with('vehicle.user.profile','vehicle.sign','suggestions.seller.profile','informations','type','images')
             ->latest('created_at')->get();
 
         return response(['data' => $requests],200);

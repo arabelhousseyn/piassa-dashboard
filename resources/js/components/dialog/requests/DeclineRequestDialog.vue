@@ -49,7 +49,7 @@ export default {
         {
             this.load = true
             axios.get('/sanctum/csrf-cookie').then(res =>{
-                axios.delete(`/api/sellers/request/destroy/${this.id}`).then(e=>{
+                axios.delete(`/api/sellers/requests/delete/${this.id}`).then(e=>{
                     if(e.status == 204)
                     {
                         this.$toast.open({
@@ -57,7 +57,7 @@ export default {
                             type : 'success'
                         })
                         this.load = false
-                        this.$emit('close1',this.id)
+                        window.location.reload()
                     }
                 }).catch(err =>{
                     this.$toast.open({

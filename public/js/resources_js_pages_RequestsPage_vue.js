@@ -90,7 +90,7 @@ __webpack_require__.r(__webpack_exports__);
 
       this.load = true;
       axios.get('/sanctum/csrf-cookie').then(function (res) {
-        axios["delete"]("/api/sellers/request/destroy/".concat(_this.id)).then(function (e) {
+        axios["delete"]("/api/sellers/requests/delete/".concat(_this.id)).then(function (e) {
           if (e.status == 204) {
             _this.$toast.open({
               message: 'Opération effectué',
@@ -98,8 +98,7 @@ __webpack_require__.r(__webpack_exports__);
             });
 
             _this.load = false;
-
-            _this.$emit('close1', _this.id);
+            window.location.reload();
           }
         })["catch"](function (err) {
           _this.$toast.open({
@@ -617,6 +616,37 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -644,6 +674,9 @@ __webpack_require__.r(__webpack_exports__);
       }, {
         text: 'Nom Client',
         value: 'vehicle.user.profile.full_name'
+      }, {
+        text: 'Vendeur reçu',
+        value: 'suggestions.seller.profile'
       }, {
         text: 'Détails',
         value: 'informations'
@@ -2193,6 +2226,116 @@ var render = function () {
                         ),
                       ]),
                     ]),
+                  ]
+                },
+              },
+              {
+                key: "item.suggestions.seller.profile",
+                fn: function (ref) {
+                  var item = ref.item
+                  return [
+                    _c("v-simple-table", {
+                      scopedSlots: _vm._u(
+                        [
+                          {
+                            key: "default",
+                            fn: function () {
+                              return [
+                                _c("thead", [
+                                  _c("tr", [
+                                    _c("th", { staticClass: "text-left" }, [
+                                      _vm._v("Vendeur"),
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("th", { staticClass: "text-left" }, [
+                                      _vm._v("Tel"),
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("th", { staticClass: "text-left" }, [
+                                      _vm._v("Statu"),
+                                    ]),
+                                  ]),
+                                ]),
+                                _vm._v(" "),
+                                _c(
+                                  "tbody",
+                                  _vm._l(
+                                    item.suggestions,
+                                    function (suggestion, index) {
+                                      return _c("tr", { key: index }, [
+                                        _c("td", [
+                                          _vm._v(
+                                            _vm._s(
+                                              suggestion.seller.profile
+                                                .first_name
+                                            ) +
+                                              " " +
+                                              _vm._s(
+                                                suggestion.seller.profile
+                                                  .first_name
+                                              )
+                                          ),
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("td", [
+                                          _vm._v(
+                                            _vm._s(suggestion.seller.phone)
+                                          ),
+                                        ]),
+                                        _vm._v(" "),
+                                        _c(
+                                          "td",
+                                          [
+                                            suggestion.suggest_him_at == null
+                                              ? _c(
+                                                  "v-chip",
+                                                  {
+                                                    attrs: {
+                                                      dark: "",
+                                                      color: "red",
+                                                    },
+                                                  },
+                                                  [
+                                                    _vm._v(
+                                                      "\n                                    pas de suggestion\n                                "
+                                                    ),
+                                                  ]
+                                                )
+                                              : _c(
+                                                  "v-chip",
+                                                  {
+                                                    attrs: {
+                                                      dark: "",
+                                                      color: "green",
+                                                    },
+                                                  },
+                                                  [
+                                                    _vm._v(
+                                                      "\n                                    suggestion à " +
+                                                        _vm._s(
+                                                          suggestion.suggest_him_at
+                                                        ) +
+                                                        "\n                                "
+                                                    ),
+                                                  ]
+                                                ),
+                                          ],
+                                          1
+                                        ),
+                                      ])
+                                    }
+                                  ),
+                                  0
+                                ),
+                              ]
+                            },
+                            proxy: true,
+                          },
+                        ],
+                        null,
+                        true
+                      ),
+                    }),
                   ]
                 },
               },

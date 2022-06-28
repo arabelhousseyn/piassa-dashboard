@@ -101,6 +101,37 @@
                     </ul>
                 </template>
 
+                <template v-slot:item.suggestions.seller.profile="{ item }">
+
+                    <v-simple-table>
+                        <template v-slot:default>
+                            <thead>
+
+                            <tr>
+                                <th class="text-left">Vendeur</th>
+                                <th class="text-left">Tel</th>
+                                <th class="text-left">Statu</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr v-for="(suggestion,index) in item.suggestions" :key="index">
+                                <td>{{ suggestion.seller.profile.first_name }} {{ suggestion.seller.profile.first_name }}</td>
+                                <td>{{  suggestion.seller.phone  }}</td>
+                                <td>
+                                    <v-chip dark color="red" v-if="suggestion.suggest_him_at == null">
+                                        pas de suggestion
+                                    </v-chip>
+                                    <v-chip dark color="green" v-else>
+                                        suggestion à {{ suggestion.suggest_him_at }}
+                                    </v-chip>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </template>
+                    </v-simple-table>
+
+                </template>
+
                 <template v-slot:no-data>
                     <v-btn
                         color="primary">
@@ -135,6 +166,7 @@ export default {
             },
             { text: 'Tel Client', value: 'vehicle.user.phone' },
             { text: 'Nom Client', value: 'vehicle.user.profile.full_name' },
+            { text: 'Vendeur reçu', value: 'suggestions.seller.profile' },
             { text: 'Détails', value: 'informations' },
             { text: 'Véhicule', value: 'vehicle' },
             { text: 'Créé à', value: 'created_at' },
