@@ -17,6 +17,9 @@
                             <thead>
                             <tr>
                                 <th class="text-left">
+                                    Vendeur/Tel
+                                </th>
+                                <th class="text-left">
                                     Marque
                                 </th>
                                 <th class="text-left">
@@ -38,6 +41,7 @@
                                 v-for="(suggestion,index) in suggestions"
                                 :key="index"
                             >
+                                <td>{{ suggestion.suggestion.request.seller.profile.first_name }} {{ suggestion.suggestion.request.seller.profile.first_name }} / {{ suggestion.suggestion.request.seller.phone }} </td>
                                 <td>{{ suggestion.suggestion.mark }}</td>
                                 <td>{{ suggestion.suggestion.price }}</td>
                                 <td>{{ suggestion.suggestion.available_at }}</td>

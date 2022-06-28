@@ -466,6 +466,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
@@ -1749,6 +1753,12 @@ var render = function () {
                               _c("tr", [
                                 _c("th", { staticClass: "text-left" }, [
                                   _vm._v(
+                                    "\n                                Vendeur/Tel\n                            "
+                                  ),
+                                ]),
+                                _vm._v(" "),
+                                _c("th", { staticClass: "text-left" }, [
+                                  _vm._v(
                                     "\n                                Marque\n                            "
                                   ),
                                 ]),
@@ -1785,6 +1795,26 @@ var render = function () {
                                 _vm.suggestions,
                                 function (suggestion, index) {
                                   return _c("tr", { key: index }, [
+                                    _c("td", [
+                                      _vm._v(
+                                        _vm._s(
+                                          suggestion.suggestion.request.seller
+                                            .profile.first_name
+                                        ) +
+                                          " " +
+                                          _vm._s(
+                                            suggestion.suggestion.request.seller
+                                              .profile.first_name
+                                          ) +
+                                          " / " +
+                                          _vm._s(
+                                            suggestion.suggestion.request.seller
+                                              .phone
+                                          ) +
+                                          " "
+                                      ),
+                                    ]),
+                                    _vm._v(" "),
                                     _c("td", [
                                       _vm._v(
                                         _vm._s(suggestion.suggestion.mark)
