@@ -587,8 +587,10 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       if (localStorage.getItem('permission') == 'granted') {
+        var notification;
+
         if (type == 'order') {
-          var _notification = new Notification('Nouvelle notification', {
+          notification = new Notification('Nouvelle notification', {
             vibrate: true,
             body: "Num\xE9ro de commande : ".concat(data.data.ref),
             badge: ""
@@ -596,7 +598,7 @@ __webpack_require__.r(__webpack_exports__);
         }
 
         if (type == 'request') {
-          var _notification2 = new Notification('Nouvelle notification', {
+          notification = new Notification('Nouvelle notification', {
             vibrate: true,
             body: "Nouvelle demande",
             badge: ""

@@ -28,9 +28,10 @@ export default {
         {
             if(localStorage.getItem('permission') == 'granted')
             {
+                let notification;
                 if(type == 'order')
                 {
-                    let notification = new Notification('Nouvelle notification',{
+                     notification = new Notification('Nouvelle notification',{
                         vibrate : true,
                         body : `Numéro de commande : ${data.data.ref}`,
                         badge : ""
@@ -39,7 +40,7 @@ export default {
 
                 if(type == 'request')
                 {
-                    let notification = new Notification('Nouvelle notification',{
+                     notification = new Notification('Nouvelle notification',{
                         vibrate : true,
                         body : `Nouvelle demande`,
                         badge : ""
