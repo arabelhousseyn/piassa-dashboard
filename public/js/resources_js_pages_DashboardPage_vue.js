@@ -583,15 +583,26 @@ __webpack_require__.r(__webpack_exports__);
     ProgressCircularComponent: _components_ProgressCircularComponent__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   methods: {
-    enableNotification: function enableNotification(data) {
+    enableNotification: function enableNotification(data, type) {
       var _this = this;
 
       if (localStorage.getItem('permission') == 'granted') {
-        var notification = new Notification('Nouvelle notification', {
-          vibrate: true,
-          body: "Num\xE9ro de commande : ".concat(data.data.ref),
-          badge: ""
-        });
+        if (type == 'order') {
+          var _notification = new Notification('Nouvelle notification', {
+            vibrate: true,
+            body: "Num\xE9ro de commande : ".concat(data.data.ref),
+            badge: ""
+          });
+        }
+
+        if (type == 'request') {
+          var _notification2 = new Notification('Nouvelle notification', {
+            vibrate: true,
+            body: "Nouvelle demande",
+            badge: ""
+          });
+        }
+
         this.$store.commit('INCREMENT_NOTIFICATION', 1);
         this.playSound();
         notification.addEventListener('click', function () {
@@ -634,7 +645,9 @@ __webpack_require__.r(__webpack_exports__);
       cluster: "eu"
     });
     var channel = pusher.subscribe('admin');
+    var channel2 = pusher.subscribe('admin');
     channel.bind('order-event', this.enableNotification);
+    channel2.bind('request-event', this.enableNotification);
   }
 });
 

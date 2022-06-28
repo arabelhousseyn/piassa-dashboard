@@ -24,15 +24,28 @@ export default {
     }),
     components: {FooterComponent, HeaderComponent, ProgressCircularComponent},
     methods : {
-        enableNotification(data)
+        enableNotification(data,type)
         {
             if(localStorage.getItem('permission') == 'granted')
             {
-                let notification = new Notification('Nouvelle notification',{
-                    vibrate : true,
-                    body : `Numéro de commande : ${data.data.ref}`,
-                    badge : ""
-                })
+                if(type == 'order')
+                {
+                    let notification = new Notification('Nouvelle notification',{
+                        vibrate : true,
+                        body : `Numéro de commande : ${data.data.ref}`,
+                        badge : ""
+                    })
+                }
+
+                if(type == 'request')
+                {
+                    let notification = new Notification('Nouvelle notification',{
+                        vibrate : true,
+                        body : `Nouvelle demande`,
+                        badge : ""
+                    })
+                }
+
                 this.$store.commit('INCREMENT_NOTIFICATION',1)
                 this.playSound()
                 notification.addEventListener('click',()=>{
@@ -73,7 +86,9 @@ export default {
          });
 
          var channel = pusher.subscribe('admin');
-         channel.bind('order-event', this.enableNotification);
+         var channel2 = pusher.subscribe('admin');
+         channel.bind('order-event', this.enableNotification)
+         channel2.bind('request-event',this.enableNotification)
     }
 }
 </script>
