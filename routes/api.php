@@ -92,7 +92,7 @@ Route::middleware(['auth:sanctum','app_version'])->group(function (){
 
         Route::prefix('requests')->group(function (){
             Route::get('all','sellerRequests');
-            Route::delete('delete/{seller_request_id}','destroySellerRequest')->whereNumber('seller_request_id');
+            Route::delete('delete/{user_request_id}','destroyUserRequest')->whereNumber('user_request_id');
         });
     });
 

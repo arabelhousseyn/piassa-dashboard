@@ -637,28 +637,22 @@ __webpack_require__.r(__webpack_exports__);
         text: 'Type',
         align: 'start',
         sortable: true,
-        value: 'request.type.name'
+        value: 'type.name'
       }, {
         text: 'Tel Client',
-        value: 'request.vehicle.user.phone'
+        value: 'vehicle.user.phone'
       }, {
         text: 'Nom Client',
-        value: 'request.vehicle.user.profile.full_name'
-      }, {
-        text: 'Tel Vendeur',
-        value: 'seller.phone'
-      }, {
-        text: 'Nom Vendeur',
-        value: 'seller.profile.first_name'
+        value: 'vehicle.user.profile.full_name'
       }, {
         text: 'Détails',
-        value: 'request.informations'
+        value: 'informations'
       }, {
         text: 'Véhicule',
-        value: 'request.vehicle'
+        value: 'vehicle'
       }, {
         text: 'Créé à',
-        value: 'request.created_at'
+        value: 'created_at'
       }, {
         text: 'actions',
         value: 'actions',
@@ -1991,7 +1985,7 @@ var render = function () {
                                     on: {
                                       click: function ($event) {
                                         return _vm.fetchSuggestions(
-                                          item.request.suggestions,
+                                          item.suggestions,
                                           item.id
                                         )
                                       },
@@ -2029,9 +2023,7 @@ var render = function () {
                                     attrs: { link: "" },
                                     on: {
                                       click: function ($event) {
-                                        return _vm.fetchImages(
-                                          item.request.images
-                                        )
+                                        return _vm.fetchImages(item.images)
                                       },
                                     },
                                   },
@@ -2109,105 +2101,95 @@ var render = function () {
                 },
               },
               {
-                key: "item.request.informations",
+                key: "item.informations",
                 fn: function (ref) {
                   var item = ref.item
-                  return _vm._l(
-                    item.request.informations,
-                    function (item, index) {
-                      return _c("ol", { key: index }, [
-                        _c("li", [
-                          _c("strong", [_vm._v("Detail " + _vm._s(index + 1))]),
-                          _vm._v(" "),
-                          _c("ul", [
-                            _c("li", [
-                              _vm._v(
-                                "Pièce : " + _vm._s(_vm.parse(item.value).piece)
-                              ),
-                            ]),
-                            _vm._v(" "),
-                            _c("li", [
-                              _vm._v(
-                                "Marque : " + _vm._s(_vm.parse(item.value).mark)
-                              ),
-                            ]),
-                            _vm._v(" "),
-                            _c("li", [
-                              _vm._v(
-                                "Quantité : " + _vm._s(_vm.parse(item.value).qt)
-                              ),
-                            ]),
-                            _vm._v(" "),
-                            _c("li", [
-                              _vm._v(
-                                "Dimenssion : " +
-                                  _vm._s(
-                                    _vm.parse(_vm.parse(item.value).details)
-                                      .dimension
-                                  ) +
-                                  " "
-                              ),
-                            ]),
-                            _vm._v(" "),
-                            _vm.parse(_vm.parse(item.value).details).left
-                              ? _c("li", [_vm._v("Partie Gauche")])
-                              : _vm._e(),
-                            _vm._v(" "),
-                            _vm.parse(_vm.parse(item.value).details).right
-                              ? _c("li", [_vm._v("Partie droite")])
-                              : _vm._e(),
-                            _vm._v(" "),
-                            _vm.parse(_vm.parse(item.value).details).front
-                              ? _c("li", [_vm._v("Partie avant")])
-                              : _vm._e(),
-                            _vm._v(" "),
-                            _vm.parse(_vm.parse(item.value).details).back
-                              ? _c("li", [_vm._v("Partie arrière")])
-                              : _vm._e(),
+                  return _vm._l(item.informations, function (item, index) {
+                    return _c("ol", { key: index }, [
+                      _c("li", [
+                        _c("strong", [_vm._v("Detail " + _vm._s(index + 1))]),
+                        _vm._v(" "),
+                        _c("ul", [
+                          _c("li", [
+                            _vm._v(
+                              "Pièce : " + _vm._s(_vm.parse(item.value).piece)
+                            ),
                           ]),
+                          _vm._v(" "),
+                          _c("li", [
+                            _vm._v(
+                              "Marque : " + _vm._s(_vm.parse(item.value).mark)
+                            ),
+                          ]),
+                          _vm._v(" "),
+                          _c("li", [
+                            _vm._v(
+                              "Quantité : " + _vm._s(_vm.parse(item.value).qt)
+                            ),
+                          ]),
+                          _vm._v(" "),
+                          _c("li", [
+                            _vm._v(
+                              "Dimenssion : " +
+                                _vm._s(
+                                  _vm.parse(_vm.parse(item.value).details)
+                                    .dimension
+                                ) +
+                                " "
+                            ),
+                          ]),
+                          _vm._v(" "),
+                          _vm.parse(_vm.parse(item.value).details).left
+                            ? _c("li", [_vm._v("Partie Gauche")])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.parse(_vm.parse(item.value).details).right
+                            ? _c("li", [_vm._v("Partie droite")])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.parse(_vm.parse(item.value).details).front
+                            ? _c("li", [_vm._v("Partie avant")])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.parse(_vm.parse(item.value).details).back
+                            ? _c("li", [_vm._v("Partie arrière")])
+                            : _vm._e(),
                         ]),
-                      ])
-                    }
-                  )
+                      ]),
+                    ])
+                  })
                 },
               },
               {
-                key: "item.request.vehicle",
+                key: "item.vehicle",
                 fn: function (ref) {
                   var item = ref.item
                   return [
                     _c("ul", [
                       _c("li", [
                         _vm._v(
-                          "Marque : " +
-                            _vm._s(item.request.vehicle.sign.name) +
-                            " "
+                          "Marque : " + _vm._s(item.vehicle.sign.name) + " "
                         ),
                       ]),
                       _vm._v(" "),
                       _c("li", [
-                        _vm._v(
-                          "Modèle : " + _vm._s(item.request.vehicle.model)
-                        ),
+                        _vm._v("Modèle : " + _vm._s(item.vehicle.model)),
+                      ]),
+                      _vm._v(" "),
+                      _c("li", [
+                        _vm._v("Année : " + _vm._s(item.vehicle.year) + " "),
                       ]),
                       _vm._v(" "),
                       _c("li", [
                         _vm._v(
-                          "Année : " + _vm._s(item.request.vehicle.year) + " "
-                        ),
-                      ]),
-                      _vm._v(" "),
-                      _c("li", [
-                        _vm._v(
-                          "motorisation : " +
-                            _vm._s(item.request.vehicle.motorization)
+                          "motorisation : " + _vm._s(item.vehicle.motorization)
                         ),
                       ]),
                       _vm._v(" "),
                       _c("li", [
                         _vm._v(
                           "numéro de châssis : " +
-                            _vm._s(item.request.vehicle.chassis_number)
+                            _vm._s(item.vehicle.chassis_number)
                         ),
                       ]),
                     ]),

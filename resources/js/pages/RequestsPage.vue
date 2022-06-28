@@ -56,11 +56,11 @@
 
                         <v-list>
                             <v-list-item-group>
-                                <v-list-item link @click="fetchSuggestions(item.request.suggestions,item.id)">
+                                <v-list-item link @click="fetchSuggestions(item.suggestions,item.id)">
                                     <v-list-item-icon><v-icon color="primary">mdi-chart-box</v-icon></v-list-item-icon>
                                     <v-list-item-content><v-list-item-title>Disponible</v-list-item-title></v-list-item-content>
                                 </v-list-item>
-                                <v-list-item link @click="fetchImages(item.request.images)">
+                                <v-list-item link @click="fetchImages(item.images)">
                                     <v-list-item-icon><v-icon color="primary">mdi-folder-multiple-image</v-icon></v-list-item-icon>
                                     <v-list-item-content><v-list-item-title>Images</v-list-item-title></v-list-item-content>
                                 </v-list-item>
@@ -73,8 +73,8 @@
                     </v-menu>
                 </template>
 
-                <template v-slot:item.request.informations="{ item }">
-                    <ol v-for="(item,index) in item.request.informations" :key="index">
+                <template v-slot:item.informations="{ item }">
+                    <ol v-for="(item,index) in item.informations" :key="index">
                         <li>
                             <strong>Detail {{index + 1}}</strong>
                             <ul>
@@ -91,13 +91,13 @@
                     </ol>
                 </template>
 
-                <template v-slot:item.request.vehicle="{ item }">
+                <template v-slot:item.vehicle="{ item }">
                     <ul>
-                        <li>Marque : {{ item.request.vehicle.sign.name }} </li>
-                        <li>Modèle : {{ item.request.vehicle.model }}</li>
-                        <li>Année : {{ item.request.vehicle.year }} </li>
-                        <li>motorisation : {{ item.request.vehicle.motorization }}</li>
-                        <li>numéro de châssis : {{ item.request.vehicle.chassis_number }}</li>
+                        <li>Marque : {{ item.vehicle.sign.name }} </li>
+                        <li>Modèle : {{ item.vehicle.model }}</li>
+                        <li>Année : {{ item.vehicle.year }} </li>
+                        <li>motorisation : {{ item.vehicle.motorization }}</li>
+                        <li>numéro de châssis : {{ item.vehicle.chassis_number }}</li>
                     </ul>
                 </template>
 
@@ -131,15 +131,13 @@ export default {
                 text: 'Type',
                 align: 'start',
                 sortable: true,
-                value: 'request.type.name'
+                value: 'type.name'
             },
-            { text: 'Tel Client', value: 'request.vehicle.user.phone' },
-            { text: 'Nom Client', value: 'request.vehicle.user.profile.full_name' },
-            { text: 'Tel Vendeur', value: 'seller.phone' },
-            { text: 'Nom Vendeur', value: 'seller.profile.first_name' },
-            { text: 'Détails', value: 'request.informations' },
-            { text: 'Véhicule', value: 'request.vehicle' },
-            { text: 'Créé à', value: 'request.created_at' },
+            { text: 'Tel Client', value: 'vehicle.user.phone' },
+            { text: 'Nom Client', value: 'vehicle.user.profile.full_name' },
+            { text: 'Détails', value: 'informations' },
+            { text: 'Véhicule', value: 'vehicle' },
+            { text: 'Créé à', value: 'created_at' },
             { text: 'actions', value: 'actions', sortable: false },
         ],
         suggestions : [],

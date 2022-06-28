@@ -15,7 +15,7 @@ use App\Services\UpdateSellerService;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Hash;
-use App\Models\{Seller, SellerJob, SellerJobSign, SellerJobType, SellerPhone, SellerRequest};
+use App\Models\{Seller, SellerJob, SellerJobSign, SellerJobType, SellerPhone, SellerRequest, UserRequest};
 use Illuminate\Http\Request;
 
 class SellerController extends Controller
@@ -370,19 +370,20 @@ class SellerController extends Controller
 
     public function sellerRequests()
     {
-        $requests = SellerRequest::with('request.type','request.informations','seller.profile',
-        'request.suggestions.suggestion','request.images','request.vehicle'
-            ,'request.vehicle.sign','request.vehicle.user.profile')->latest('created_at')->get();
+
+        $requests = UserRequest::with('vehicle.user.profile','vehicle.sign','suggestions','informations','type','images')
+            ->latest('created_at')->get();
+
         return response(['data' => $requests],200);
     }
 
-    public function destroySellerRequest($seller_request_id)
+    public function destroyUserRequest($user_request_id)
     {
         try {
-            $sellerRequest = SellerRequest::findOrFail($seller_request_id);
-            if(!$sellerRequest->trashed())
+            $userRequest = UserRequest::findOrFail($user_request_id);
+            if(!$userRequest->trashed())
             {
-                $sellerRequest->forceDelete();
+                $userRequest->forceDelete();
                 return response()->noContent();
             }
         }catch (ModelNotFoundException $exception)
