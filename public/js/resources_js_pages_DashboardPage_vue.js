@@ -587,10 +587,8 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       if (localStorage.getItem('permission') == 'granted') {
-        var notification;
-
         if (type == 'order') {
-          notification = new Notification('Nouvelle notification', {
+          var notification = new Notification('Nouvelle notification', {
             vibrate: true,
             body: "Num\xE9ro de commande : ".concat(data.data.ref),
             badge: ""
@@ -605,16 +603,18 @@ __webpack_require__.r(__webpack_exports__);
         }
 
         if (type == 'request') {
-          notification = new Notification('Nouvelle notification', {
+          var _notification = new Notification('Nouvelle notification', {
             vibrate: true,
             body: "Nouvelle demande",
             badge: ""
           });
+
           this.playSound();
-          notification.addEventListener('click', function () {
+
+          _notification.addEventListener('click', function () {
             _this.$router.push('/home/requests');
 
-            notification.close();
+            _notification.close();
           });
         }
       }
@@ -652,8 +652,8 @@ __webpack_require__.r(__webpack_exports__);
       cluster: "eu"
     });
     var channel = pusher.subscribe('admin');
-    channel.bind('order-event', this.enableNotification);
-    channel.bind('request-event', this.enableNotification);
+    channel.bind('order-event', this.enableNotification('order'));
+    channel.bind('request-event', this.enableNotification('request'));
   }
 });
 

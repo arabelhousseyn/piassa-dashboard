@@ -28,10 +28,9 @@ export default {
         {
             if(localStorage.getItem('permission') == 'granted')
             {
-                let notification;
                 if(type == 'order')
                 {
-                     notification = new Notification('Nouvelle notification',{
+                    let notification = new Notification('Nouvelle notification',{
                         vibrate : true,
                         body : `Numéro de commande : ${data.data.ref}`,
                         badge : ""
@@ -47,7 +46,7 @@ export default {
 
                 if(type == 'request')
                 {
-                     notification = new Notification('Nouvelle notification',{
+                    let notification = new Notification('Nouvelle notification',{
                         vibrate : true,
                         body : `Nouvelle demande`,
                         badge : ""
@@ -93,8 +92,8 @@ export default {
          });
 
          var channel = pusher.subscribe('admin');
-         channel.bind('order-event', this.enableNotification)
-         channel.bind('request-event',this.enableNotification)
+         channel.bind('order-event', this.enableNotification('order'))
+         channel.bind('request-event',this.enableNotification('request'))
     }
 }
 </script>
