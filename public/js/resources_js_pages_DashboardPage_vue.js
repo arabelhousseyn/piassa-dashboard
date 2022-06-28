@@ -595,6 +595,13 @@ __webpack_require__.r(__webpack_exports__);
             body: "Num\xE9ro de commande : ".concat(data.data.ref),
             badge: ""
           });
+          this.$store.commit('INCREMENT_NOTIFICATION', 1);
+          this.playSound();
+          notification.addEventListener('click', function () {
+            _this.$router.push('/home/orders');
+
+            notification.close();
+          });
         }
 
         if (type == 'request') {
@@ -603,15 +610,13 @@ __webpack_require__.r(__webpack_exports__);
             body: "Nouvelle demande",
             badge: ""
           });
+          this.playSound();
+          notification.addEventListener('click', function () {
+            _this.$router.push('/home/requests');
+
+            notification.close();
+          });
         }
-
-        this.$store.commit('INCREMENT_NOTIFICATION', 1);
-        this.playSound();
-        notification.addEventListener('click', function () {
-          _this.$router.push('/home/orders');
-
-          notification.close();
-        });
       }
     },
     playSound: function playSound() {

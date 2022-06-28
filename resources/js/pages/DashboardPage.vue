@@ -36,6 +36,13 @@ export default {
                         body : `Numéro de commande : ${data.data.ref}`,
                         badge : ""
                     })
+
+                    this.$store.commit('INCREMENT_NOTIFICATION',1)
+                    this.playSound()
+                    notification.addEventListener('click',()=>{
+                        this.$router.push('/home/orders')
+                        notification.close()
+                    })
                 }
 
                 if(type == 'request')
@@ -45,14 +52,13 @@ export default {
                         body : `Nouvelle demande`,
                         badge : ""
                     })
-                }
 
-                this.$store.commit('INCREMENT_NOTIFICATION',1)
-                this.playSound()
-                notification.addEventListener('click',()=>{
-                    this.$router.push('/home/orders')
-                    notification.close()
-                })
+                    this.playSound()
+                    notification.addEventListener('click',()=>{
+                        this.$router.push('/home/requests')
+                        notification.close()
+                    })
+                }
             }
         },
         playSound()
