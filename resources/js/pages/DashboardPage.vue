@@ -93,9 +93,8 @@ export default {
          });
 
          var channel = pusher.subscribe('admin');
-         var channel2 = pusher.subscribe('admin');
          channel.bind('order-event', this.enableNotification)
-         channel2.bind('request-event',this.enableNotification)
+         channel.bind('request-event',this.enableNotification)
     }
 }
 </script>

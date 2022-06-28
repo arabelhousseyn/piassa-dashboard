@@ -652,9 +652,8 @@ __webpack_require__.r(__webpack_exports__);
       cluster: "eu"
     });
     var channel = pusher.subscribe('admin');
-    var channel2 = pusher.subscribe('admin');
     channel.bind('order-event', this.enableNotification);
-    channel2.bind('request-event', this.enableNotification);
+    channel.bind('request-event', this.enableNotification);
   }
 });
 
