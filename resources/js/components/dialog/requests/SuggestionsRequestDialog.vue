@@ -8,8 +8,6 @@
             <v-card>
                 <v-card-title class="text-h5">
                     Suggestions
-                    <v-spacer></v-spacer>
-                    <store-suggestion-request  :seller_request_id="seller_request_id" />
                 </v-card-title>
                 <v-card-text>
                     <v-simple-table>
