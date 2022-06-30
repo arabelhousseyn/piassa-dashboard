@@ -563,10 +563,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 
 
 
@@ -583,50 +579,46 @@ __webpack_require__.r(__webpack_exports__);
     ProgressCircularComponent: _components_ProgressCircularComponent__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   methods: {
-    enableNotification: function enableNotification(data, type) {
+    enableNotification: function enableNotification(data) {
       var _this = this;
 
       if (localStorage.getItem('permission') == 'granted') {
-        if (type == 'order') {
-          var notification = new Notification('Nouvelle notification', {
-            vibrate: true,
-            body: "Num\xE9ro de commande : ".concat(data.data.ref),
-            badge: ""
-          });
-          this.$store.commit('INCREMENT_NOTIFICATION', 1);
-          this.playSound();
-          notification.addEventListener('click', function () {
-            _this.$router.push('/home/orders');
+        var notification = new Notification('Nouvelle notification', {
+          vibrate: true,
+          body: "Num\xE9ro de commande : ".concat(data.data.ref),
+          badge: ""
+        });
+        this.$store.commit('INCREMENT_NOTIFICATION', 1);
+        this.playSound();
+        notification.addEventListener('click', function () {
+          _this.$router.push('/home/orders');
 
-            notification.close();
-          });
-        }
-
-        if (type == 'request') {
-          var _notification = new Notification('Nouvelle notification', {
-            vibrate: true,
-            body: "Nouvelle demande",
-            badge: ""
-          });
-
-          this.playSound();
-
-          _notification.addEventListener('click', function () {
-            _this.$router.push('/home/requests');
-
-            _notification.close();
-          });
-        }
+          notification.close();
+        });
       }
     },
-    playSound: function playSound() {
-      var x = document.getElementById("myAudio"); //let audio = new Audio(sound)
+    enableNotification2: function enableNotification2(data) {
+      var _this2 = this;
 
-      x.play();
+      var notification = new Notification('Nouvelle notification', {
+        vibrate: true,
+        body: "Nouvelle demande",
+        badge: ""
+      });
+      this.playSound();
+      notification.addEventListener('click', function () {
+        _this2.$router.push('/home/requests');
+
+        notification.close();
+      });
+    },
+    playSound: function playSound() {
+      var audio = new Audio('http://soundbible.com/mp3/Air Plane Ding-SoundBible.com-496729130.mp3');
+      audio.play();
     }
   },
   mounted: function mounted() {
-    var _this2 = this;
+    var _this3 = this;
 
     if (Notification.permission == 'denied') {
       var permission = Notification.requestPermission();
@@ -638,11 +630,11 @@ __webpack_require__.r(__webpack_exports__);
     axios.defaults.headers.common['Authorization'] = "Bearer ".concat(this.$store.state.user.token);
     axios.get('/sanctum/csrf-cookie').then(function (res) {
       axios.get('/api/company/data').then(function (e) {
-        _this2.isLoading = false;
+        _this3.isLoading = false;
 
-        _this2.$store.commit('SET_DATA', e.data);
+        _this3.$store.commit('SET_DATA', e.data);
       })["catch"](function (err) {
-        _this2.$toast.open({
+        _this3.$toast.open({
           message: 'Erreur dans serveur veuillez réessayer',
           type: 'error'
         });
@@ -652,8 +644,8 @@ __webpack_require__.r(__webpack_exports__);
       cluster: "eu"
     });
     var channel = pusher.subscribe('admin');
-    channel.bind('order-event', this.enableNotification('order'));
-    channel.bind('request-event', this.enableNotification('request'));
+    channel.bind('order-event', this.enableNotification);
+    channel.bind('request-event', this.enableNotification2);
   }
 });
 
@@ -23562,8 +23554,6 @@ var render = function () {
     "div",
     { staticClass: "dashboard" },
     [
-      _vm._m(0),
-      _vm._v(" "),
       _c("progress-circular-component"),
       _vm._v(" "),
       _c("header-component"),
@@ -23575,21 +23565,7 @@ var render = function () {
     1
   )
 }
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("audio", { attrs: { id: "myAudio" } }, [
-      _c("source", {
-        attrs: { src: "storage/notification.mp3", type: "audio/mpeg" },
-      }),
-      _vm._v(
-        "\n        Your browser does not support the audio element.\n    "
-      ),
-    ])
-  },
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

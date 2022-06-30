@@ -1,9 +1,5 @@
 <template>
     <div class="dashboard">
-        <audio id="myAudio">
-            <source src="storage/notification.mp3" type="audio/mpeg">
-            Your browser does not support the audio element.
-        </audio>
         <progress-circular-component />
             <header-component />
             <v-main v-if="!isLoading">
@@ -24,12 +20,10 @@ export default {
     }),
     components: {FooterComponent, HeaderComponent, ProgressCircularComponent},
     methods : {
-        enableNotification(data,type)
+        enableNotification(data)
         {
             if(localStorage.getItem('permission') == 'granted')
             {
-                if(type == 'order')
-                {
                     let notification = new Notification('Nouvelle notification',{
                         vibrate : true,
                         body : `Numéro de commande : ${data.data.ref}`,
@@ -42,29 +36,26 @@ export default {
                         this.$router.push('/home/orders')
                         notification.close()
                     })
-                }
-
-                if(type == 'request')
-                {
-                    let notification = new Notification('Nouvelle notification',{
-                        vibrate : true,
-                        body : `Nouvelle demande`,
-                        badge : ""
-                    })
-
-                    this.playSound()
-                    notification.addEventListener('click',()=>{
-                        this.$router.push('/home/requests')
-                        notification.close()
-                    })
-                }
             }
+        },
+        enableNotification2(data)
+        {
+            let notification = new Notification('Nouvelle notification',{
+                vibrate : true,
+                body : `Nouvelle demande`,
+                badge : ""
+            })
+
+            this.playSound()
+            notification.addEventListener('click',()=>{
+                this.$router.push('/home/requests')
+                notification.close()
+            })
         },
         playSound()
         {
-            var x = document.getElementById("myAudio")
-            //let audio = new Audio(sound)
-            x.play()
+            let audio = new Audio('http://soundbible.com/mp3/Air Plane Ding-SoundBible.com-496729130.mp3')
+            audio.play()
         }
     },
      mounted() {
@@ -92,8 +83,8 @@ export default {
          });
 
          var channel = pusher.subscribe('admin');
-         channel.bind('order-event', this.enableNotification('order'))
-         channel.bind('request-event',this.enableNotification('request'))
+         channel.bind('order-event', this.enableNotification)
+         channel.bind('request-event',this.enableNotification2)
     }
 }
 </script>
