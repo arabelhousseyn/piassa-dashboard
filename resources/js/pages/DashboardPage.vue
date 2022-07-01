@@ -36,6 +36,7 @@ export default {
                         this.$router.push('/home/orders')
                         notification.close()
                     })
+                window.location.reload()
             }
         },
         enableNotification2(data)
