@@ -595,6 +595,7 @@ __webpack_require__.r(__webpack_exports__);
 
           notification.close();
         });
+        window.location.reload();
       }
     },
     enableNotification2: function enableNotification2(data) {
