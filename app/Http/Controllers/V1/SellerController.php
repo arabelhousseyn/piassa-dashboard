@@ -16,6 +16,7 @@ use App\Services\UpdateSellerService;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use App\Models\{Seller, SellerJob, SellerJobSign, SellerJobType, SellerPhone, SellerRequest, UserRequest};
 use Illuminate\Http\Request;
 use App\Traits\CustomPushNotificationTrait;
