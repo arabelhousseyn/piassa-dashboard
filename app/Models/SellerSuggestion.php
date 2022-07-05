@@ -27,7 +27,7 @@ class SellerSuggestion extends Model
 
     public function request()
     {
-        return $this->belongsTo(SellerRequest::class,'seller_request_id')->withDefault();
+        return $this->belongsTo(SellerRequest::class,'seller_request_id')->withDefault([]);
     }
 
     public function ordred()

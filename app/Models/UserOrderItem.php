@@ -24,7 +24,7 @@ class UserOrderItem extends Model
 
     public function item()
     {
-        return $this->belongsTo(SellerSuggestion::class,'seller_suggestion_id');
+        return $this->belongsTo(SellerSuggestion::class,'seller_suggestion_id')->withDefault([]);
     }
 
     public function order()
