@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\V1;
 
+use App\Events\NewRequestEvent;
 use App\Events\NewSuggestionEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SotreSellerJobTypes;
@@ -17,9 +18,10 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Hash;
 use App\Models\{Seller, SellerJob, SellerJobSign, SellerJobType, SellerPhone, SellerRequest, UserRequest};
 use Illuminate\Http\Request;
-
+use App\Traits\CustomPushNotificationTrait;
 class SellerController extends Controller
 {
+    use CustomPushNotificationTrait;
     /**
      * Display a listing of the resource.
      *
@@ -418,7 +420,7 @@ class SellerController extends Controller
             $data = SellerRequest::with('suggestion','request.informations')->find($request->seller_request_id);
             event(new NewSuggestionEvent($data,$seller_request->request->vehicle->user_id));
             $this->pushNotification('Vous avez une nouvelle suggestion','nouvelle suggestion',[$seller_request->request->vehicle->user_id],'clients');
-//                event(new NewRequestEvent($data));
+            event(new NewRequestEvent($data));
             return response(['success' => true],201);
 
         }else{
