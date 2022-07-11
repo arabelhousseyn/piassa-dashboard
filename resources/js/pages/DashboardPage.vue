@@ -41,7 +41,7 @@ export default {
         },
         enableNotification2(data)
         {
-            let notification = new Notification('Nouvelle notification',{
+            let notification = new Notification('Nouvelle demande',{
                 vibrate : true,
                 body : `Nouvelle demande`,
                 badge : ""
