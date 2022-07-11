@@ -52,6 +52,7 @@ export default {
                 this.$router.push('/home/requests')
                 notification.close()
             })
+            window.location.reload()
         },
         playSound()
         {

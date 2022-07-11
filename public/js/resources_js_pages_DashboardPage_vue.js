@@ -612,6 +612,7 @@ __webpack_require__.r(__webpack_exports__);
 
         notification.close();
       });
+      window.location.reload();
     },
     playSound: function playSound() {
       var audio = new Audio('http://soundbible.com/mp3/Air Plane Ding-SoundBible.com-496729130.mp3');
